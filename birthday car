@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Khushi!</title>
+    <style>
+        body {
+            background-color: #ffefea;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .uno-card {
+            width: 200px;
+            height: 300px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/5/50/UNO_card_backside.svg') no-repeat center center / cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flipped {
+            transform: rotateY(180deg);
+        }
+        .message-card {
+            display: none;
+            width: 200px;
+            height: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff3b30;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotateY(180deg);
+        }
+        .second-message {
+            display: none;
+            width: 200px;
+            height: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff1493;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            transform: rotateY(180deg);
+        }
+        @keyframes poppers {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        .popper {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('https://cdn-icons-png.flaticon.com/512/2829/2829151.png') no-repeat center center / contain;
+            animation: poppers 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="uno-card" id="unoCard"></div>
+        <div class="message-card" id="messageCard">🎉 Happy Birthday Khushi! 🎉</div>
+        <div class="second-message" id="secondMessage">💖 Thanks for being there with me on late night calls, please always be with me! 💖</div>
+    </div>
+
+    <script>
+        let unoCard = document.getElementById('unoCard');
+        let messageCard = document.getElementById('messageCard');
+        let secondMessage = document.getElementById('secondMessage');
+        let step = 0;
+
+        function createPoppers() {
+            for (let i = 0; i < 10; i++) {
+                let popper = document.createElement("div");
+                popper.classList.add("popper");
+                popper.style.left = Math.random() * 100 + "vw";
+                popper.style.top = Math.random() * 100 + "vh";
+                document.body.appendChild(popper);
+                setTimeout(() => popper.remove(), 1000);
+            }
+        }
+
+        unoCard.addEventListener("click", function() {
+            if (step === 0) {
+                unoCard.classList.add("flipped");
+                setTimeout(() => {
+                    unoCard.style.display = "none";
+                    messageCard.style.display = "flex";
+                    createPoppers();
+                }, 600);
+                step = 1;
+            } else if (step === 1) {
+                messageCard.style.display = "none";
+                secondMessage.style.display = "flex";
+                createPoppers();
+                step = 2;
+            }
+        });
+    </script>
+</body>
+</html>
